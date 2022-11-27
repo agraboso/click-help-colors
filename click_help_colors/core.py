@@ -119,10 +119,12 @@ class HelpColorsMultiCommand(HelpColorsCommand, click.MultiCommand):
                     _extend_instance(cmd, HelpColorsCommand)
 
             if not getattr(cmd, "help_headers_color", None):
-                cmd.help_headers_color = self.help_headers_color
+                setattr(cmd, "help_headers_color", self.help_headers_color)
             if not getattr(cmd, "help_options_color", None):
-                cmd.help_options_color = self.help_options_color
+                setattr(cmd, "help_options_color", self.help_options_color)
             if not getattr(cmd, "help_options_custom_colors", None):
-                cmd.help_options_custom_colors = self.help_options_custom_colors
+                setattr(
+                    cmd, "help_options_custom_colors", self.help_options_custom_colors
+                )
 
         return cmd_name, cmd, args[1:]
