@@ -9,12 +9,13 @@ class HelpColorsException(Exception):
 
 def _colorize(text, color=None, suffix=None):
     if not color or "NO_COLOR" in os.environ:
-        return text + (suffix or '')
+        return text + (suffix or "")
     try:
-        return '\033[%dm' % (_ansi_colors[color]) + text + \
-                    _ansi_reset_all + (suffix or '')
+        return (
+            "\033[%dm" % (_ansi_colors[color]) + text + _ansi_reset_all + (suffix or "")
+        )
     except KeyError:
-        raise HelpColorsException('Unknown color %r' % color)
+        raise HelpColorsException("Unknown color %r" % color)
 
 
 def _extend_instance(obj, cls):
