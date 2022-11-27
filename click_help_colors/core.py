@@ -40,8 +40,14 @@ class HelpColorsFormatter(click.HelpFormatter):
                 return self.options_custom_colors[opt]
         return self.options_color
 
-    def write_usage(self, prog: str, args: str = "", prefix: t.Optional[str] = "Usage") -> None:
-        colorized_prefix = _colorize(prefix, color=self.headers_color, suffix=": ")
+    def write_usage(
+        self, prog: str, args: str = "", prefix: t.Optional[str] = "Usage"
+    ) -> None:
+        colorized_prefix = _colorize(
+            prefix if prefix is not None else "Usage",
+            color=self.headers_color,
+            suffix=": ",
+        )
         super().write_usage(prog, args, prefix=colorized_prefix)
 
     def write_heading(self, heading: str) -> None:

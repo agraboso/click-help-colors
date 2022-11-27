@@ -29,9 +29,9 @@ def version_option(
     msg_parts = []
     for s in re.split(r"(%\(version\)s|%\(prog\)s)", message):
         if s == "%(prog)s":
-            msg_parts.append(_colorize(prog_name, prog_name_color or message_color))
+            msg_parts.append(_colorize(s, prog_name_color or message_color))
         elif s == "%(version)s":
-            msg_parts.append(_colorize(version, version_color or message_color))
+            msg_parts.append(_colorize(s, version_color or message_color))
         else:
             msg_parts.append(_colorize(s, message_color))
     message = "".join(msg_parts)
