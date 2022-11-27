@@ -115,7 +115,9 @@ class HelpColorsMultiCommand(HelpColorsCommand, click.MultiCommand):
             if not isinstance(cmd, HelpColorsCommand):
                 if isinstance(cmd, click.Group):
                     _extend_instance(cmd, HelpColorsGroup)
-                if isinstance(cmd, click.Command):
+                elif isinstance(cmd, click.MultiCommand):
+                    _extend_instance(cmd, HelpColorsMultiCommand)
+                elif isinstance(cmd, click.Command):
                     _extend_instance(cmd, HelpColorsCommand)
 
             if not getattr(cmd, "help_headers_color", None):
