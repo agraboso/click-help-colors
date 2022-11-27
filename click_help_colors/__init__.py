@@ -2,7 +2,6 @@ from .core import (
     HelpColorsCommand,
     HelpColorsFormatter,
     HelpColorsGroup,
-    HelpColorsMixin,
     HelpColorsMultiCommand,
 )
 
@@ -16,7 +15,6 @@ __all__ = [
     "HelpColorsException",
     "HelpColorsFormatter",
     "HelpColorsGroup",
-    "HelpColorsMixin",
     "HelpColorsMultiCommand",
     "_colorize",
     "version_option",

@@ -63,7 +63,7 @@ class HelpColorsFormatter(click.HelpFormatter):
         super().write_dl(colorized_rows, *args, **kwargs)
 
 
-class HelpColorsMixin:
+class HelpColorsCommand(click.Command):
     def __init__(
         self,
         help_headers_color: t.Optional[str] = None,
@@ -89,7 +89,7 @@ class HelpColorsMixin:
         return formatter.getvalue().rstrip("\n")
 
 
-class HelpColorsGroup(HelpColorsMixin, click.Group):
+class HelpColorsGroup(HelpColorsCommand, click.Group):
     def command(self, *args: t.Any, **kwargs: t.Any) -> t.Any:
         kwargs.setdefault("cls", HelpColorsCommand)
         kwargs.setdefault("help_headers_color", self.help_headers_color)
@@ -105,17 +105,13 @@ class HelpColorsGroup(HelpColorsMixin, click.Group):
         return super().group(*args, **kwargs)
 
 
-class HelpColorsCommand(HelpColorsMixin, click.Command):
-    pass
-
-
-class HelpColorsMultiCommand(HelpColorsMixin, click.MultiCommand):
+class HelpColorsMultiCommand(HelpColorsCommand, click.MultiCommand):
     def resolve_command(
         self, ctx: click.Context, args: t.List[str]
     ) -> t.Tuple[t.Optional[str], t.Optional[click.Command], t.List[str]]:
         cmd_name, cmd, args[1:] = super().resolve_command(ctx, args)
 
-        if not isinstance(cmd, HelpColorsMixin):
+        if not isinstance(cmd, HelpColorsCommand):
             if isinstance(cmd, click.Group):
                 _extend_instance(cmd, HelpColorsGroup)
             if isinstance(cmd, click.Command):
