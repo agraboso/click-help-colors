@@ -2,7 +2,6 @@ import re
 import typing as t
 
 import click
-from click import version_option as click_version_option
 
 from .utils import _colorize
 
@@ -11,11 +10,13 @@ FC = t.TypeVar("FC", bound=t.Union[t.Callable[..., t.Any], click.Command])
 
 def version_option(
     version: t.Optional[str] = None,
+    *param_decls: str,
+    package_name: t.Optional[str] = None,
     prog_name: t.Optional[str] = None,
     message: str = "%(prog)s, version %(version)s",
-    message_color: t.Optional[str] = None,
-    prog_name_color: t.Optional[str] = None,
     version_color: t.Optional[str] = None,
+    prog_name_color: t.Optional[str] = None,
+    message_color: t.Optional[str] = None,
     **kwargs: t.Any,
 ) -> t.Callable[[FC], FC]:
     """
@@ -36,6 +37,11 @@ def version_option(
             msg_parts.append(_colorize(s, message_color))
     message = "".join(msg_parts)
 
-    return click_version_option(
-        version=version, prog_name=prog_name, message=message, **kwargs
+    return click.version_option(
+        version,
+        *param_decls,
+        package_name=package_name,
+        prog_name=prog_name,
+        message=message,
+        **kwargs,
     )
