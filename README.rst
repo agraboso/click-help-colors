@@ -153,8 +153,7 @@ From source:
     $ cd click-help-colors
     $ python setup.py install
 
-.. _Click: http://click.pocoo.org/
-
+.. _Click: https://click.palletsprojects.com/
 
 .. |pypi| image:: https://img.shields.io/pypi/v/click-help-colors
     :alt: PyPI
