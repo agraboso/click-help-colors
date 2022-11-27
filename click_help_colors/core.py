@@ -111,17 +111,18 @@ class HelpColorsMultiCommand(HelpColorsCommand, click.MultiCommand):
     ) -> t.Tuple[t.Optional[str], t.Optional[click.Command], t.List[str]]:
         cmd_name, cmd, args[1:] = super().resolve_command(ctx, args)
 
-        if not isinstance(cmd, HelpColorsCommand):
-            if isinstance(cmd, click.Group):
-                _extend_instance(cmd, HelpColorsGroup)
-            if isinstance(cmd, click.Command):
-                _extend_instance(cmd, HelpColorsCommand)
+        if cmd is not None:
+            if not isinstance(cmd, HelpColorsCommand):
+                if isinstance(cmd, click.Group):
+                    _extend_instance(cmd, HelpColorsGroup)
+                if isinstance(cmd, click.Command):
+                    _extend_instance(cmd, HelpColorsCommand)
 
-        if not getattr(cmd, "help_headers_color", None):
-            cmd.help_headers_color = self.help_headers_color
-        if not getattr(cmd, "help_options_color", None):
-            cmd.help_options_color = self.help_options_color
-        if not getattr(cmd, "help_options_custom_colors", None):
-            cmd.help_options_custom_colors = self.help_options_custom_colors
+            if not getattr(cmd, "help_headers_color", None):
+                cmd.help_headers_color = self.help_headers_color
+            if not getattr(cmd, "help_options_color", None):
+                cmd.help_options_color = self.help_options_color
+            if not getattr(cmd, "help_options_custom_colors", None):
+                cmd.help_options_custom_colors = self.help_options_custom_colors
 
         return cmd_name, cmd, args[1:]
