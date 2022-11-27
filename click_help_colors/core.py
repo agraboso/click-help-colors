@@ -16,10 +16,10 @@ class HelpColorsFormatter(click.HelpFormatter):
         *args,
         **kwargs
     ):
+        super().__init__(*args, **kwargs)
         self.headers_color = headers_color
         self.options_color = options_color
         self.options_custom_colors = options_custom_colors
-        super().__init__(*args, **kwargs)
 
     def _get_opt_names(self, option_name):
         opts = self.options_regex.findall(option_name)
@@ -63,10 +63,10 @@ class HelpColorsMixin:
         *args,
         **kwargs
     ):
+        super().__init__(*args, **kwargs)
         self.help_headers_color = help_headers_color
         self.help_options_color = help_options_color
         self.help_options_custom_colors = help_options_custom_colors
-        super().__init__(*args, **kwargs)
 
     def get_help(self, ctx):
         formatter = HelpColorsFormatter(
@@ -81,9 +81,6 @@ class HelpColorsMixin:
 
 
 class HelpColorsGroup(HelpColorsMixin, click.Group):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
     def command(self, *args, **kwargs):
         kwargs.setdefault("cls", HelpColorsCommand)
         kwargs.setdefault("help_headers_color", self.help_headers_color)
@@ -100,14 +97,10 @@ class HelpColorsGroup(HelpColorsMixin, click.Group):
 
 
 class HelpColorsCommand(HelpColorsMixin, click.Command):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    pass
 
 
 class HelpColorsMultiCommand(HelpColorsMixin, click.MultiCommand):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
     def resolve_command(self, ctx, args):
         cmd_name, cmd, args[1:] = super().resolve_command(ctx, args)
 
