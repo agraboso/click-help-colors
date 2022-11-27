@@ -1,3 +1,11 @@
+[0.10.0]
+-------------------------------
+- Add type hints.
+- Refactor some internals with the help of mypy and the type hints.
+- Drop support for Python 3.6 (Click 8 requires Python >=3.7).
+- Abandon setup.py in favor of pyproject.toml.
+- Changed required version of Click to >=8,<9
+
 [0.9.1]
 -------------------------------
 - Fix issue with options with multiple names. `PR #16 <https://github.com/click-contrib/click-help-colors/pull/16>`_
