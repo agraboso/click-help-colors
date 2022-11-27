@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
-import io
 import re
 from setuptools import setup
 
 
-with io.open("README.rst", "rt", encoding="utf8") as f:
+with open("README.rst") as f:
     readme = f.read()
 
 
-with io.open("click_help_colors/__init__.py", "rt", encoding="utf8") as f:
+with open("click_help_colors/__init__.py") as f:
     version = re.search(r"__version__ = '(.*?)'", f.read()).group(1)
 
 
