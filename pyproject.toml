@@ -1,0 +1,43 @@
+[project]
+name = "click-help-colors"
+description = "Colorization of help messages in Click"
+readme = "README.rst"
+authors = [
+    { name = "Roman Tonkonozhko" , email = "recvmsg@protonmail.com" },
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+]
+keywords = [ "click" ]
+requires-python = ">=3.7"
+dependencies = [
+    "click >=8,<9"
+]
+dynamic = [ "version" ]
+
+[project.license]
+file = "LICENSE.txt"
+
+[project.urls]
+repository = "https://github.com/click-contrib/click-help-colors"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[build-system]
+requires = [ "setuptools >= 65" ]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [ "click_help_colors" ]
+include-package-data = true
+
+[tool.setuptools.dynamic]
+version = { attr = "click_help_colors.__version__" }
